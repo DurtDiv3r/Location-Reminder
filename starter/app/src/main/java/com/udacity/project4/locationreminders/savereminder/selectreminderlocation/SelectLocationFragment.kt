@@ -20,8 +20,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PointOfInterest
 import com.udacity.project4.R
 import com.udacity.project4.base.BaseFragment
+import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
@@ -37,6 +39,7 @@ class SelectLocationFragment : BaseFragment() {
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var selectedLocation: PointOfInterest
     private var lastKnownLocation: Location? = null
     private val defaultLocation = LatLng(-26.29275480332018, 28.090699663277594)
 
@@ -77,6 +80,7 @@ class SelectLocationFragment : BaseFragment() {
             if (map != null) {
                 //        TODO: call this function after the user confirms on the selected location
                 onLocationSelected()
+
             }
         }
 
@@ -89,6 +93,10 @@ class SelectLocationFragment : BaseFragment() {
         //        TODO: When the user confirms on the selected location,
         //         send back the selected location details to the view model
         //         and navigate back to the previous fragment to save the reminder and add the geofence
+        if (selectedLocation != null) {
+            _viewModel.selectedPOI.value = selectedLocation
+            _viewModel.navigationCommand.value = NavigationCommand.Back
+        }
     }
 
 
@@ -200,6 +208,9 @@ class SelectLocationFragment : BaseFragment() {
                 latLng.latitude,
                 latLng.longitude
             )
+
+            selectedLocation = PointOfInterest(latLng, "Poi", getString(R.string.reminder_location))
+
             map.addMarker(
                 MarkerOptions()
                     .position(latLng)
@@ -218,6 +229,8 @@ class SelectLocationFragment : BaseFragment() {
                     .position(poi.latLng)
                     .title(poi.name)
             )
+            selectedLocation = poi
+
             poiMarker.showInfoWindow()
         }
     }
