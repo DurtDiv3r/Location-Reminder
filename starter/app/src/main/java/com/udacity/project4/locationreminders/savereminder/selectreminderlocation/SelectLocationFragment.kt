@@ -95,6 +95,9 @@ class SelectLocationFragment : BaseFragment() {
         //         and navigate back to the previous fragment to save the reminder and add the geofence
         if (selectedLocation != null) {
             _viewModel.selectedPOI.value = selectedLocation
+            _viewModel.latitude.value = selectedLocation.latLng.latitude
+            _viewModel.longitude.value = selectedLocation.latLng.longitude
+            _viewModel.reminderSelectedLocationStr.value = selectedLocation.name
             _viewModel.navigationCommand.value = NavigationCommand.Back
         }
     }
