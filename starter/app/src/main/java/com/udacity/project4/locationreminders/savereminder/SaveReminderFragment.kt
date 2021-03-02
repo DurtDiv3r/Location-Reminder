@@ -60,7 +60,13 @@ class SaveReminderFragment : BaseFragment() {
                 longitude
             )
             _viewModel.validateAndSaveReminder(saveReminder)
+            addGeofence(saveReminder)
         }
+    }
+
+    private fun addGeofence(saveReminder: ReminderDataItem) {
+
+
     }
 
     override fun onDestroy() {
