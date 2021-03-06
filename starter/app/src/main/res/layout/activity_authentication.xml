@@ -25,6 +25,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/login"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:textAlignment="center"
         android:background="@color/design_default_color_primary"
         android:textColor="@color/white"

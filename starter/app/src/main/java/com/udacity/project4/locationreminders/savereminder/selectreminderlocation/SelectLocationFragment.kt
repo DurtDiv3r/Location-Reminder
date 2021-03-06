@@ -85,9 +85,6 @@ class SelectLocationFragment : BaseFragment() {
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
-//        TODO: add the map setup implementation
-//        TODO: zoom to the user location after taking his permission
-//        TODO: put a marker to location that the user selected
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
@@ -96,9 +93,6 @@ class SelectLocationFragment : BaseFragment() {
     }
 
     private fun onLocationSelected(poi: PointOfInterest) {
-        //        TODO: When the user confirms on the selected location,
-        //         send back the selected location details to the view model
-        //         and navigate back to the previous fragment to save the reminder and add the geofence {
         _viewModel.selectedPOI.value = poi
         _viewModel.latitude.value = poi.latLng.latitude
         _viewModel.longitude.value = poi.latLng.longitude
@@ -150,7 +144,7 @@ class SelectLocationFragment : BaseFragment() {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-                            map?.moveCamera(
+                            map?.animateCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
                                         lastKnownLocation!!.latitude,
@@ -160,7 +154,7 @@ class SelectLocationFragment : BaseFragment() {
                             )
                         }
                     } else {
-                        map?.moveCamera(
+                        map?.animateCamera(
                             CameraUpdateFactory
                                 .newLatLngZoom(defaultLocation, DEFAULT_ZOOM.toFloat())
                         )
@@ -391,7 +385,7 @@ class SelectLocationFragment : BaseFragment() {
 
     companion object {
         private val TAG = SelectLocationFragment::class.java.simpleName
-        private const val DEFAULT_ZOOM = 15
+        private const val DEFAULT_ZOOM = 20
 
         // Keys for storing activity state.
         private const val KEY_CAMERA_POSITION = "camera_position"
