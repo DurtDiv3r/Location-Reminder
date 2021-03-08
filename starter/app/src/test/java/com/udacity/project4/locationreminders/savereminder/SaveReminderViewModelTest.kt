@@ -87,4 +87,18 @@ class SaveReminderViewModelTest {
         assertThat(viewModel.latitude.getOrAwaitValue(), nullValue())
         assertThat(viewModel.longitude.getOrAwaitValue(), nullValue())
     }
+
+    @Test
+    fun validateAndSaveReminder_empty_title() {
+        dataSource.setReturnError(true)
+        viewModel.validateAndSaveReminder(ReminderDataItem(null, "Test Description", "Test Location", 0.0, 0.0))
+        assertEquals(viewModel.showSnackBarInt.getOrAwaitValue(), R.string.err_enter_title)
+    }
+
+    @Test
+    fun validateAndSaveReminder_empty_location() {
+        dataSource.setReturnError(true)
+        viewModel.validateAndSaveReminder(ReminderDataItem("Test Title", "Test Description", null, 0.0, 0.0))
+        assertEquals(viewModel.showSnackBarInt.getOrAwaitValue(), R.string.err_select_location)
+    }
 }
