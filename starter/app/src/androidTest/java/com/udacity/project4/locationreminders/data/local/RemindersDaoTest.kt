@@ -26,8 +26,6 @@ import org.junit.Test
 @SmallTest
 class RemindersDaoTest {
 
-//    TODO: Add testing implementation to the RemindersDao.kt
-
     private lateinit var db: RemindersDatabase
 
     @get:Rule

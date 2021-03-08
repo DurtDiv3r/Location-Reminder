@@ -33,8 +33,6 @@ class RemindersListViewModelTest {
     private lateinit var viewModel: RemindersListViewModel
     private lateinit var appContext: Context
 
-    //TODO: provide testing to the RemindersListViewModel and its live data objects
-
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 

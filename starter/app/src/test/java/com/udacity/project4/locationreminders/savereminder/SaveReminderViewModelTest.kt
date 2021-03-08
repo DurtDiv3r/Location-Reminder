@@ -52,8 +52,6 @@ class SaveReminderViewModelTest {
         stopKoin()
     }
 
-
-    //TODO: provide testing to the SaveReminderView and its live data objects
     @Test
     fun check_loading() = mainCoroutineRule.runBlockingTest {
         mainCoroutineRule.pauseDispatcher()

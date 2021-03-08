@@ -27,7 +27,6 @@ import org.junit.runner.RunWith
 @MediumTest
 class RemindersLocalRepositoryTest {
 
-
     private lateinit var db: RemindersDatabase
     private lateinit var dao: RemindersDao
     private lateinit var localRepository: RemindersLocalRepository

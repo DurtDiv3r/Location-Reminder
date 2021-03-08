@@ -9,8 +9,6 @@ class FakeDataSource : ReminderDataSource {
     var shouldReturnError = false
     var reminders = mutableListOf<ReminderDTO>()
 
-//    TODO: Create a fake data source to act as a double to the real data source
-
     fun setReturnError(value: Boolean) {
         shouldReturnError = value
     }
