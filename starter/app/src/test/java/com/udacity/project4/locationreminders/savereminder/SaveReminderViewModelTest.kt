@@ -13,6 +13,7 @@ import com.udacity.project4.locationreminders.getOrAwaitValue
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -54,7 +55,7 @@ class SaveReminderViewModelTest {
 
     //TODO: provide testing to the SaveReminderView and its live data objects
     @Test
-    fun check_loading() {
+    fun check_loading() = mainCoroutineRule.runBlockingTest {
         mainCoroutineRule.pauseDispatcher()
 
         viewModel.saveReminder(
