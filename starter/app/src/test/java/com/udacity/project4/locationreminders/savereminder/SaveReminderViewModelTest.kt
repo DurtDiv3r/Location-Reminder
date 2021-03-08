@@ -14,6 +14,7 @@ import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
@@ -76,6 +77,14 @@ class SaveReminderViewModelTest {
         assertEquals(viewModel.navigationCommand.getOrAwaitValue(), NavigationCommand.Back)
     }
 
-
-
+    @Test
+    fun onClear_check_all_set_to_null() {
+        viewModel.onClear()
+        assertThat(viewModel.reminderTitle.getOrAwaitValue(), nullValue())
+        assertThat(viewModel.reminderDescription.getOrAwaitValue(), nullValue())
+        assertThat(viewModel.reminderSelectedLocationStr.getOrAwaitValue(), nullValue())
+        assertThat(viewModel.selectedPOI.getOrAwaitValue(), nullValue())
+        assertThat(viewModel.latitude.getOrAwaitValue(), nullValue())
+        assertThat(viewModel.longitude.getOrAwaitValue(), nullValue())
+    }
 }
