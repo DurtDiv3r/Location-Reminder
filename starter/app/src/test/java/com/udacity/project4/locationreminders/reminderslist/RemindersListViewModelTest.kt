@@ -2,6 +2,7 @@ package com.udacity.project4.locationreminders.reminderslist
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,6 +13,7 @@ import com.udacity.project4.locationreminders.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
@@ -19,6 +21,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
+import org.mockito.ArgumentMatchers.isNotNull
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -70,6 +73,14 @@ class RemindersListViewModelTest {
 
         viewModel.loadReminders()
         assertThat(viewModel.showNoData.getOrAwaitValue(), `is`(true))
+    }
+
+    @Test
+    fun loadReminder_error_snackbar() = mainCoroutineRule.runBlockingTest {
+        dataSource.setReturnError(true)
+
+        viewModel.loadReminders()
+        assertThat(viewModel.showSnackBar.getOrAwaitValue(), notNullValue())
     }
 
 }
