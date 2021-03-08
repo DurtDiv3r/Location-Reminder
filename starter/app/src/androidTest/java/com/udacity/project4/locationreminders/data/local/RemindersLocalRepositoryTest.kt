@@ -112,8 +112,8 @@ class RemindersLocalRepositoryTest {
             0.0
         )
         localRepository.saveReminder(newReminder)
-
         localRepository.deleteAllReminders()
+
         val result = localRepository.getReminders() as Result.Success
         assertThat(result.data.isEmpty(), `is`(true))
     }
@@ -129,6 +129,7 @@ class RemindersLocalRepositoryTest {
         )
         localRepository.saveReminder(newReminder)
         localRepository.deleteAllReminders()
+
         val retrievedReminder = localRepository.getReminder(newReminder.id) as Result.Error
         assertThat(retrievedReminder.message, Matchers.notNullValue())
     }
