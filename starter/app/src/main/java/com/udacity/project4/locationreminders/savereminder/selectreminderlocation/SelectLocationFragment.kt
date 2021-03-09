@@ -59,7 +59,7 @@ class SelectLocationFragment : BaseFragment() {
         googleMap?.let {
             map = it
             setMapStyle(map)
-            setMapLongClick(map)
+            setMapClick(map)
             setPoiClick(map)
             if (foregroundAndBackgroundLocationPermissionApproved()) {
                 getDeviceLocation()
@@ -167,8 +167,8 @@ class SelectLocationFragment : BaseFragment() {
         }
     }
 
-    private fun setMapLongClick(map: GoogleMap) {
-        map.setOnMapLongClickListener { latLng ->
+    private fun setMapClick(map: GoogleMap) {
+        map.setOnMapClickListener { latLng ->
 
             // A Snippet is Additional text that's displayed below the title.
             val snippet = String.format(
