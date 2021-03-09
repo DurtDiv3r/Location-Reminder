@@ -103,15 +103,17 @@ class RemindersActivityTest :
         onView(withId(R.id.addReminderFAB)).perform(click())
         onView(withId(R.id.reminderTitle)).perform(replaceText("Test Title"))
         onView(withId(R.id.reminderDescription)).perform(replaceText("Test Description"))
+        //Just to see screen
+        Thread.sleep(1000)
 
         onView(withId(R.id.selectLocation)).perform(click())
-        onView(withId(R.id.map)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        onView(withId(R.id.map)).perform(longClick())
+        onView(withId(R.id.map)).check(matches(isDisplayed()))
+        onView(withId(R.id.map)).perform(click())
+
+        //Just to see screen
         Thread.sleep(1000)
         onView(withId(R.id.save_button)).perform(click())
-
         onView(withId(R.id.saveReminder)).perform(click())
-        Thread.sleep(1000)
 
         onView(withText("Test Title")).check(matches(isDisplayed()))
         onView(withText("Test Description")).check(matches(isDisplayed()))
